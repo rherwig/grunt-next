@@ -21,7 +21,8 @@ const requirejs = () => {
                 name: join(__dirname, 'node_modules/almond/almond.js'),
                 include: ['main'],
                 out: 'build/bundle.js',
-                optimize: 'none'
+                optimize: 'uglify2',
+                generateSourceMaps: true
             }
         }
     };
