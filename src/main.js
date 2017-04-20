@@ -2,7 +2,9 @@ require([
     'components/slider',
     //'components/utils',
     'es6!components/next'
-], function(Slider, Utils) {
+], function(Slider, Next) {
     window.Slider = Slider;
-    window.Utils = Utils;
+    window.Next = Next;
+
+    Next.hello();
 });
