@@ -15,9 +15,34 @@ const requirejs = {
     }
 };
 
+const getWrapStart = () => '(function() {';
+const getWrapEnd = (entryPoint) => `require('${entryPoint}'); })();`;
+
+const requirejsModules = {
+    compile: {
+        options: {
+            baseUrl: 'src',
+            mainConfigFile: 'src/require.config.js',
+            modules: [{
+                name: 'main',
+                include: [
+                    '../node_modules/almond/almond.js'
+                ]
+            }],
+            dir: 'build',
+            optimize: process.env.NODE_ENV === 'production' ? 'uglify2' : 'none',
+            generateSourceMaps: true,
+            wrap: {
+                start: getWrapStart(),
+                end: getWrapEnd('main')
+            }
+        }
+    }
+};
+
 module.exports = (grunt) => {
     grunt.initConfig({
-        requirejs
+        requirejs: requirejsModules
     });
 
     grunt.loadNpmTasks('grunt-contrib-requirejs');
